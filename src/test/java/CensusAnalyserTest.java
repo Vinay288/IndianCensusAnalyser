@@ -32,4 +32,13 @@ public class CensusAnalyserTest {
             assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }
     }
+    @Test
+    public void givenStateCensusCSVFile_WhenEmpty_ShouldThrowException() {
+        try {
+            StateCensusAnalyser censusAnalyser = new StateCensusAnalyser();
+            int numOfRecords = censusAnalyser.loadIndiaCensusData("./src/main/resources/State_Missing_Header.csv");
+        } catch (CensusAnalyserException e) {
+            assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
+        }
+    }
 }
