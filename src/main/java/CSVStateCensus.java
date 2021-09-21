@@ -7,15 +7,15 @@ public class CSVStateCensus {
     @CsvBindByName(column = "stateName", required = true)
     public String stateName;
 
-    @CsvBindByName(column = "stateNumber", required = true)
-    public String stateNumber;
+    @CsvBindByName(column = "population", required = true)
+    public String population;
 
     @Override
     public String toString() {
         return "CSVStateCensus{" +
                 "slno='" + slno + '\'' +
                 ", stateName='" + stateName + '\'' +
-                ", stateNumber='" + stateNumber + '\'' +
+                ", stateNumber='" + population + '\'' +
                 '}';
     }
 }
