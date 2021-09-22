@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class StateCensusAnalyser {
+public class StateCensusAnalyser implements StateAnalyserIf {
 
-
+    @Override
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
         ArrayList<CSVStateCensus> csvList = new ArrayList<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
@@ -18,9 +18,8 @@ public class StateCensusAnalyser {
                     .withType(CSVStateCensus.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
-            Iterator<CSVStateCensus> csvIterator = csvToBean.iterator();
-            while (csvIterator.hasNext()) {
-                csvList.add(csvIterator.next());
+            for (CSVStateCensus csvStateCensus : (Iterable<CSVStateCensus>) csvToBean) {
+                csvList.add(csvStateCensus);
             }
             return csvList.size();
         } catch (IOException e) {
@@ -37,6 +36,7 @@ public class StateCensusAnalyser {
 
     }
 
+    @Override
     public int loadStateCodeData(String csvFilePath) throws CensusAnalyserException {
         ArrayList<CSVStateCode> csvList = new ArrayList<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath))) {
@@ -44,9 +44,8 @@ public class StateCensusAnalyser {
                     .withType(CSVStateCode.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
-            Iterator<CSVStateCode> csvIterator = csvToBean.iterator();
-            while (csvIterator.hasNext()) {
-                csvList.add(csvIterator.next());
+            for (CSVStateCode csvStateCode : (Iterable<CSVStateCode>) csvToBean) {
+                csvList.add(csvStateCode);
             }
             return csvList.size();
         } catch (IOException e) {
